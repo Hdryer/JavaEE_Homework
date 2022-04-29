@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.dao.CourseMapper">
+        <select id="queryall" resultType="course">
+            select * from s_course;
+        </select>
+
+        <select id="queryid" parameterType="int" resultType="course">
+            select * from s_course where id = #{id};
+        </select>
+
+    <select id="querybysid" resultType="course">
+            select id,name,hours,sid
+            from s_course
+            where sid=#{sid};
+    </select>
+    <select id="addhours" parameterType="int" >
+        update s_course set hours = hours+8
+        where id = #{id}
+    </select>
+
+    <insert id="addcourse" parameterType="course" >
+        insert into s_course (name,hours,sid) values (#{name},#{hours},#{sid});
+    </insert>
+
+    <insert id="addcourse_image" parameterType="course">
+        insert into s_course (name,hours,sid,url) values (#{name},#{hours},#{sid},#{url});
+    </insert>
+
+    <delete id="deletecourse" parameterType="int">
+        delete from s_course where id = #{id};
+    </delete>
+
+    <update id="updatecourse" parameterType="course">
+        update s_course set name =#{name},hours=#{hours},sid=#{sid} where id = #{id};
+    </update>
+</mapper>
